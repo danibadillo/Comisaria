@@ -20,6 +20,7 @@ public class GestionParking {
         Coche c2=new Coche("largo","4386-HFG","45847098");
         Motocicleta m1=new Motocicleta("7657-BVC","86257809");
         Plaza p1=new Plaza(2,1);
+        Parking pk1=new Parking("blanco");
         
         
         
@@ -28,6 +29,8 @@ public class GestionParking {
         System.out.println(v1.toString());
         System.out.println("el precio del parking es: "+p1.precio());
         System.out.println(p1.toString());
+        
+        System.out.println(pk1.alquilar(c1));
         
         
         

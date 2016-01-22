@@ -6,6 +6,7 @@
 package gestionparking;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -15,7 +16,7 @@ import java.util.Map;
 public class Parking {
     private String nombre;
     private String direccion;
-    private Map<Integer,Plaza> listaPlazas = new HashMap<>();
+    private Map<String,Plaza> listaPlazas = new HashMap<>();
     
     public Parking(String nombre){
         this.nombre=nombre;
@@ -32,10 +33,23 @@ public class Parking {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-    public Map<Integer,Plaza> getListaPlazas() {
+    public Map<String,Plaza> getListaPlazas() {
         return listaPlazas;
     }
-    public void setListaPlazas(Map<Integer,Plaza> listaPlazas) {
+    public void setListaPlazas(Map<String,Plaza> listaPlazas) {
         this.listaPlazas = listaPlazas;
+    }
+    public String alquilar(Vehiculo vehiculo){
+        Iterator<String> it =listaPlazas.keySet().iterator();
+        String plaza=null;
+        while(it.hasNext()){
+            String numPlaza=it.next();
+            Plaza plazaP=listaPlazas.get(numPlaza);
+            if(plazaP.getAparcado()==null){
+                listaPlazas.put(numPlaza, plazaP);
+                return numPlaza;
+            }
+        }
+        return null;
     }
 }
