@@ -13,6 +13,7 @@ class Plaza {
     public int numPlaza;
     public int numSotano;
     public Vehiculo aparcado;
+    public char tipo;
     
     public Plaza(int numPlaza,int numSotano){
         this.numPlaza=numPlaza;
@@ -35,6 +36,12 @@ class Plaza {
     }
     public void setAparcado(Vehiculo aparcado) {
         this.aparcado = aparcado;
+    }
+    public char getTipo(){
+        return tipo;
+    }
+    public void setTipo(char tipo){
+        this.tipo=tipo;
     }
     public int precio(){
         int precio = 0;

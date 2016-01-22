@@ -16,5 +16,5 @@ public class Parking {
     public String nombre,direccion;
     Map<Integer,Plaza> listaPlazas=new HashMap<>();
     
-    
+    public Parking(String nombre)
 }
