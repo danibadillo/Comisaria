@@ -10,7 +10,8 @@ package gestionparking;
  * @author Lourdes
  */
 public class Vehiculo {
-    public String matricula,modelo,color,nifDueño,telefono;
+    public String matricula,modelo,color,nifDueño;
+    public int telefono;
     
     public Vehiculo(String matricula,String nifDueño){
         this.matricula=matricula;
@@ -41,11 +42,10 @@ public class Vehiculo {
     public void setNifDueño(String nifDueño) {
         this.nifDueño = nifDueño;
     }
-    public String getTelefono() {
-        
+    public int getTelefono() {
         return telefono;
     }
-    public void setTelefono(String telefono) {
+    public void setTelefono(int telefono) {
         try{
             this.telefono = telefono;
         }catch(Exception e){
