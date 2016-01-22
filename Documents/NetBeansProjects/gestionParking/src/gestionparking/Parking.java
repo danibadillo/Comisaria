@@ -13,8 +13,29 @@ import java.util.Map;
  * @author daw1
  */
 public class Parking {
-    public String nombre,direccion;
-    Map<Integer,Plaza> listaPlazas=new HashMap<>();
+    private String nombre;
+    private String direccion;
+    private Map<Integer,Plaza> listaPlazas = new HashMap<>();
     
-    public Parking(String nombre)
+    public Parking(String nombre){
+        this.nombre=nombre;
+    }
+    public String getNombre() {
+        return nombre;
+    }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    public String getDireccion() {
+        return direccion;
+    }
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+    public Map<Integer,Plaza> getListaPlazas() {
+        return listaPlazas;
+    }
+    public void setListaPlazas(Map<Integer,Plaza> listaPlazas) {
+        this.listaPlazas = listaPlazas;
+    }
 }
