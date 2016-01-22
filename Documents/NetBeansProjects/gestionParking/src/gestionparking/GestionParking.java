@@ -30,8 +30,8 @@ public class GestionParking {
         System.out.println(v1.toString());
         System.out.println("el precio del parking es: "+p1.precio());
         System.out.println(p1.toString());
-        p1.setAparcado(v1);
-        System.out.println(p2.toString());
+        p1.setAparcado(c1);
+        
         
         
         

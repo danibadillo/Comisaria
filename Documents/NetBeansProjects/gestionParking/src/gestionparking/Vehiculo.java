@@ -42,14 +42,16 @@ public class Vehiculo {
         this.nifDueño = nifDueño;
     }
     public String getTelefono() {
-        String mensaje="";
-        if(telefono.length()>9){
-            return "el telefono introducido no es correcto";
-        }
+        
         return telefono;
     }
     public void setTelefono(String telefono) {
-        this.telefono = telefono;
+        try{
+            this.telefono = telefono;
+        }catch(Exception e){
+            System.out.println("telefono erroneo");
+        }
+        
     }
     @Override
     public String toString(){

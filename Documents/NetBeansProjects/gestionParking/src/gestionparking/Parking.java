@@ -40,14 +40,14 @@ public class Parking {
         this.listaPlazas = listaPlazas;
     }
     public String alquilar(Vehiculo vehiculo){
-        String numPlaza=null;
+        String numeroPlaza=null;
         Iterator<String> it =listaPlazas.keySet().iterator();
         while(it.hasNext()){
             String snn=it.next();
             Plaza plazaOcupada=listaPlazas.get(snn);
             if(plazaOcupada.getAparcado()==null){
                 listaPlazas.put(snn, plazaOcupada);
-                return numPlaza;
+                return numeroPlaza;
             }
                 }
         return null;
