@@ -12,7 +12,7 @@ package gestionparking;
 class Plaza {
     public int numPlaza;
     public int numSotano;
-    public Vehiculo aparcado;
+    public Vehiculo aparcado=null;
     public char tipo;
     
     public Plaza(int numPlaza,int numSotano){
