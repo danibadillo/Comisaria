@@ -10,19 +10,19 @@ package gestionparking;
  * @author daw1
  */
 class Plaza {
-    public String numeroPlaza;
+    public int numeroPlaza;
     public int numSotano;
     public Vehiculo aparcado;
     public char tipo;
     
-    public Plaza(String numeroPlaza,int numSotano){
+    public Plaza(int numeroPlaza,int numSotano){
         this.numeroPlaza=numeroPlaza;
         this.numSotano=numSotano;
     }
-    public String getNumeroPlaza() {
+    public int getNumeroPlaza() {
         return numeroPlaza;
     }
-    public void setNumeroPlaza(String numeroPlaza) {
+    public void setNumeroPlaza(int numeroPlaza) {
         this.numeroPlaza = numeroPlaza;
     }
     public int getNumSotano() {
@@ -41,12 +41,12 @@ class Plaza {
         return tipo;
     }
     public boolean setTipo(char tipo){
-        boolean valido = false;
+        boolean mensaje = false;
         if (tipo == 'C' || tipo == 'M') {
-            valido = true;
+            mensaje = true;
             this.tipo = tipo;
         }
-        return valido;
+        return mensaje;
     }
     public int precio(){
         int precio = 0;

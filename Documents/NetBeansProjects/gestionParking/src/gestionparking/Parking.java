@@ -5,6 +5,7 @@
  */
 package gestionparking;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.Map;
 public class Parking {
     private String nombre;
     private String direccion;
-    private Map<String,Plaza> listaPlazas = new HashMap<>();
+    private Map<Integer,Plaza> listaPlazas = new HashMap<>();
     
     public Parking(String nombre){
         this.nombre=nombre;
@@ -34,49 +35,50 @@ public class Parking {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-    public Map<String,Plaza> getListaPlazas() {
+    public Map<Integer,Plaza> getListaPlazas() {
         return listaPlazas;
     }
-    public void setListaPlazas(Map<String,Plaza> listaPlazas) {
+    public void setListaPlazas(Map<Integer,Plaza> listaPlazas) {
         this.listaPlazas = listaPlazas;
     }
     public String alquilar(Vehiculo vehiculo){
-        boolean f = false;
-        String numeroPlaza=null;
-        Iterator<String> it= listaPlazas.keySet().iterator();
-        while(it.hasNext() || f==true){
-            String snn = it.next();
-            Plaza aparcado = listaPlazas.get(it);
-            if (aparcado.getAparcado()==null){
-                listaPlazas.put(snn,aparcado);
-                f=true;
-                numeroPlaza=aparcado.getNumeroPlaza();
+        int mensaje;
+        boolean preguntar=true;
+        String resultado = null;
+        Iterator<Integer> it= this.listaPlazas.keySet().iterator();
+        while(it.hasNext() && preguntar==true){
+            mensaje=it.next();
+            if(this.listaPlazas.get(mensaje).getAparcado()==null){
+                preguntar=false;
+                this.listaPlazas.get(mensaje).setAparcado(vehiculo);
+                resultado=Integer.toString(mensaje);
             }
         }
-        
-        return numeroPlaza;
+        return resultado;
     }
     public int darBaja(int numeroPlaza){
         int mensaje = 0;
-        Iterator<String> it=listaPlazas.keySet().iterator();
-        while(it.hasNext()){
-            String snn=it.next();
-            Plaza aparcado=listaPlazas.get(it);
-            if(aparcado.getAparcado()!=null){
-                listaPlazas.remove(snn,aparcado);
-                mensaje=0;
+        boolean preguntar=true;
+        int resultado=-1;
+        Iterator<Integer> it= this.listaPlazas.keySet().iterator();
+        while(it.hasNext() && preguntar==true)
+            mensaje=it.next();
+        if(mensaje==numeroPlaza){
+            preguntar=false;
+            if(this.listaPlazas.get(mensaje).getAparcado()!=null){
+                this.listaPlazas.get(mensaje).setAparcado(null);
+                resultado=0;
             }else{
-                mensaje=1;
+                resultado=2;
             }
-            if(aparcado==null){
-                mensaje=2;
-            }
+        }else{
+            resultado=1;
         }
-        return mensaje;
+        return resultado;
     }
-    public List<Plaza>listarPlazas(String estado,char tipo){
+    
         
-    }
+    
     }
 
 
