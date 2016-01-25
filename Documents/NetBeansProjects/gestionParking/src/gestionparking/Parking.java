@@ -7,6 +7,7 @@ package gestionparking;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,16 +41,46 @@ public class Parking {
         this.listaPlazas = listaPlazas;
     }
     public String alquilar(Vehiculo vehiculo){
+        boolean f = false;
         String numeroPlaza=null;
-        Iterator<String> it =listaPlazas.keySet().iterator();
+        Iterator<String> it= listaPlazas.keySet().iterator();
+        while(it.hasNext() || f==true){
+            String snn = it.next();
+            Plaza aparcado = listaPlazas.get(it);
+            if (aparcado.getAparcado()==null){
+                listaPlazas.put(snn,aparcado);
+                f=true;
+                numeroPlaza=aparcado.getNumeroPlaza();
+            }
+        }
+        
+        return numeroPlaza;
+    }
+    public int darBaja(int numeroPlaza){
+        int mensaje = 0;
+        Iterator<String> it=listaPlazas.keySet().iterator();
         while(it.hasNext()){
             String snn=it.next();
-            Plaza plazaOcupada=listaPlazas.get(snn);
-            if(plazaOcupada.getAparcado()==null){
-                listaPlazas.put(snn, plazaOcupada);
-                return numeroPlaza;
+            Plaza aparcado=listaPlazas.get(it);
+            if(aparcado.getAparcado()!=null){
+                listaPlazas.remove(snn,aparcado);
+                mensaje=0;
+            }else{
+                mensaje=1;
             }
-                }
-        return null;
+            if(aparcado==null){
+                mensaje=2;
+            }
+        }
+        return mensaje;
     }
-}
+    public List<Plaza>listarPlazas(String estado,char tipo){
+        
+    }
+    }
+
+
+
+    
+        
+

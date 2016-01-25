@@ -10,20 +10,20 @@ package gestionparking;
  * @author daw1
  */
 class Plaza {
-    public int numPlaza;
+    public String numeroPlaza;
     public int numSotano;
     public Vehiculo aparcado;
     public char tipo;
     
-    public Plaza(int numPlaza,int numSotano){
-        this.numPlaza=numPlaza;
+    public Plaza(String numeroPlaza,int numSotano){
+        this.numeroPlaza=numeroPlaza;
         this.numSotano=numSotano;
     }
-    public int getNumPlaza() {
-        return numPlaza;
+    public String getNumeroPlaza() {
+        return numeroPlaza;
     }
-    public void setNumPlaza(int numPlaza) {
-        this.numPlaza = numPlaza;
+    public void setNumeroPlaza(String numeroPlaza) {
+        this.numeroPlaza = numeroPlaza;
     }
     public int getNumSotano() {
         return numSotano;
@@ -40,8 +40,13 @@ class Plaza {
     public char getTipo(){
         return tipo;
     }
-    public void setTipo(char tipo){
-        this.tipo=tipo;
+    public boolean setTipo(char tipo){
+        boolean valido = false;
+        if (tipo == 'C' || tipo == 'M') {
+            valido = true;
+            this.tipo = tipo;
+        }
+        return valido;
     }
     public int precio(){
         int precio = 0;
@@ -64,9 +69,9 @@ class Plaza {
     public String toString(){
         String mensaje=null;
         if(this.aparcado==null){
-            mensaje="Numero plaza: "+this.numPlaza+" Sotano: "+this.numSotano;
+            mensaje="Numero plaza: "+this.numeroPlaza+" Sotano: "+this.numSotano;
         }else{
-            mensaje="Numero plaza: "+this.numPlaza+" Sotano: "+this.numSotano+"\nVehiculo: "+this.aparcado.toString()+"\nPrecio: "+this.precio();
+            mensaje="Numero plaza: "+this.numeroPlaza+" Sotano: "+this.numSotano+"\nVehiculo: "+this.aparcado.toString()+"\nPrecio: "+this.precio();
         }
         return mensaje;
     }
