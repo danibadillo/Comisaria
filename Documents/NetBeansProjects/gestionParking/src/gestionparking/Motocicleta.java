@@ -10,15 +10,15 @@ package gestionparking;
  * @author Lourdes
  */
 public class Motocicleta extends Vehiculo {
-    public int numRuedas;
+    public int numeroRuedas;
 
     public Motocicleta(String matricula, String nifDueño) {
         super(matricula, nifDueño);
     }
-    public int getNumRuedas() {
-        return numRuedas;
+    public int getNumeroRuedas() {
+        return numeroRuedas;
     }
-    public void setNumRuedas(int numRuedas) {
-        this.numRuedas = numRuedas;
+    public void setNumeroRuedas(int numeroRuedas) {
+        this.numeroRuedas = numeroRuedas;
     }
 }

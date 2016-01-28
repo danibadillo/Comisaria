@@ -7,29 +7,17 @@ package gestionparking;
 
 /**
  *
- * @author daw1
+ * @author Lourdes
  */
-class Plaza {
-    public int numeroPlaza;
-    public int numSotano;
+public class Plaza {
     public Vehiculo aparcado;
+    public int numeroSotano,numeroPlaza;
     public char tipo;
     
-    public Plaza(int numeroPlaza,int numSotano){
+    public Plaza(int numeroPlaza,int numeroSotano,char tipo){
         this.numeroPlaza=numeroPlaza;
-        this.numSotano=numSotano;
-    }
-    public int getNumeroPlaza() {
-        return numeroPlaza;
-    }
-    public void setNumeroPlaza(int numeroPlaza) {
-        this.numeroPlaza = numeroPlaza;
-    }
-    public int getNumSotano() {
-        return numSotano;
-    }
-    public void setNumSotano(int numSotano) {
-        this.numSotano = numSotano;
+        this.numeroSotano=numeroSotano;
+        this.tipo=tipo;
     }
     public Vehiculo getAparcado() {
         return aparcado;
@@ -37,44 +25,53 @@ class Plaza {
     public void setAparcado(Vehiculo aparcado) {
         this.aparcado = aparcado;
     }
-    public char getTipo(){
+    public int getNumeroSotano() {
+        return numeroSotano;
+    }
+    public void setNumeroSotano(int numeroSotano) {
+        this.numeroSotano = numeroSotano;
+    }
+    public int getNumeroPlaza() {
+        return numeroPlaza;
+    }
+    public void setNumeroPlaza(int numeroPlaza) {
+        this.numeroPlaza = numeroPlaza;
+    }
+    public char getTipo() {
         return tipo;
     }
-    public boolean setTipo(char tipo){
-        boolean mensaje = false;
-        if (tipo == 'C' || tipo == 'M') {
-            mensaje = true;
-            this.tipo = tipo;
-        }
-        return mensaje;
+    public void setTipo(char tipo) {
+        this.tipo = tipo;
     }
     public int precio(){
         int precio = 0;
-        if(this.aparcado instanceof Coche){
-            Coche automovil=(Coche) this.aparcado;
-            if(automovil.getTipo().equalsIgnoreCase("corto")){
-                precio=40;
+        if(this.aparcado!=null){
+            if(this.aparcado instanceof Motocicleta){
+                precio=20;
             }
-            if(automovil.getTipo().equalsIgnoreCase("largo")){
-                precio=55;
+            if(this.aparcado instanceof Coche){
+                Coche c=(Coche) this.aparcado;
+                String tipoPrecio=""+c.getTipo();
+                if(tipoPrecio.equalsIgnoreCase("l")){
+                    precio=55;
+                }else{
+                    precio=40;
+                }
+            }
+            if(this.numeroSotano==2){
+                precio-=5;
             }
         }
-        if(this.aparcado instanceof Motocicleta){
-            Motocicleta moto=(Motocicleta) this.aparcado;
-            precio=25;
-        }
-      return precio;
+        return precio;
     }
     @Override
     public String toString(){
-        String mensaje=null;
+        String mensaje;
         if(this.aparcado==null){
-            mensaje="Numero plaza: "+this.numeroPlaza+" Sotano: "+this.numSotano;
+            mensaje="Numero de plaza: "+this.numeroPlaza+" Sotano: "+this.numeroSotano;
         }else{
-            mensaje="Numero plaza: "+this.numeroPlaza+" Sotano: "+this.numSotano+"\nVehiculo: "+this.aparcado.toString()+"\nPrecio: "+this.precio();
+            mensaje="Numero de plaza: "+this.numeroPlaza+" Sotano: "+this.numeroSotano+"\nVehiculo: "+this.aparcado.toString()+"\nPrecio: "+this.precio();
         }
         return mensaje;
     }
-        
-    
 }

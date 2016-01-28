@@ -49,14 +49,13 @@ public class Vehiculo {
         try{
             this.telefono = telefono;
         }catch(Exception e){
-            System.out.println("telefono erroneo");
+            System.out.println("Numero de telefono incorrecto");
         }
         
     }
     @Override
     public String toString(){
         return this.matricula+" "+this.modelo+" "+this.color;
-            
     }
     
 }

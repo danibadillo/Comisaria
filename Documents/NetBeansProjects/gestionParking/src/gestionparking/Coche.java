@@ -10,17 +10,17 @@ package gestionparking;
  * @author Lourdes
  */
 public class Coche extends Vehiculo {
-    public String tipoCoche;
+    public char tipo;
 
-    public Coche(String tipoCoche, String matricula, String nifDueño) {
+    public Coche(char tipo, String matricula, String nifDueño) {
         super(matricula, nifDueño);
-        this.tipoCoche = tipoCoche;
+        this.tipo = tipo;
     }
-    public String getTipo() {
-        return tipoCoche;
+    public char getTipo() {
+        return tipo;
     }
-    public void setTipo(String tipoCoche) {
-        this.tipoCoche = tipoCoche;
+    public void setTipo(char tipo) {
+        this.tipo = tipo;
     }
 
     
