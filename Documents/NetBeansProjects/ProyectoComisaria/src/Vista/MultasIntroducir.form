@@ -26,126 +26,112 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel1" alignment="0" min="-2" pref="119" max="-2" attributes="0"/>
-                                  <Component id="jLabel2" alignment="0" min="-2" pref="97" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="jLabel5" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jLabel4" alignment="0" min="-2" pref="108" max="-2" attributes="0"/>
-                          <Component id="jLabel3" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="txtinfractor" pref="191" max="32767" attributes="0"/>
-                              <Component id="txtidMulta" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtdescripcion" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtfecha" alignment="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Component id="spinnerImporte" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="19" pref="19" max="-2" attributes="0"/>
-                              <Component id="jLabel7" min="-2" pref="60" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="comboboxid" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="comboboxid" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="44" max="32767" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="165" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="botonintroducirdatos" pref="235" max="32767" attributes="0"/>
+                          <Component id="botonregresarMenuPrincipal" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jLabel1" min="-2" pref="87" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="txtidMulta" min="-2" pref="191" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel5" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
+                          <Component id="jLabel4" alignment="0" min="-2" pref="108" max="-2" attributes="0"/>
+                          <Component id="jLabel2" alignment="0" min="-2" pref="97" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                              <Component id="jLabel7" min="-2" pref="89" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="txtinfractor" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="spinnerImporte" min="-2" pref="83" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="txtdescripcion" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jLabel6" min="-2" pref="112" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
               </Group>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="jLabel6" min="-2" pref="88" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
-              <Component id="botonintroducirdatos" min="-2" pref="235" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtidMulta" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtdescripcion" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtfecha" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtinfractor" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="spinnerImporte" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="spinnerImporte" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="comboboxid" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="63" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
               <Component id="botonintroducirdatos" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="64" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="botonregresarMenuPrincipal" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="23" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jLabel1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Id de la Multa"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtidMulta">
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="text" type="java.lang.String" value="Descripci&#xf3;n"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtdescripcion">
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel3">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Fecha"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtfecha">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
@@ -172,11 +158,11 @@
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
               <StringArray count="5">
-                <StringItem index="0" value="Juan Sanchez 1234AS"/>
-                <StringItem index="1" value="Laura Montiel 2314RT"/>
-                <StringItem index="2" value="Pepe Gonzalez 7655CD"/>
-                <StringItem index="3" value="Luis Lopez 7765AS"/>
-                <StringItem index="4" value="Matias Prats 3221DF"/>
+                <StringItem index="0" value="Juan Sanchez "/>
+                <StringItem index="1" value="Laura Montiel "/>
+                <StringItem index="2" value="Pepe Gonzalez "/>
+                <StringItem index="3" value="Luis Lopez "/>
+                <StringItem index="4" value="Matias Prats "/>
               </StringArray>
             </Property>
           </Properties>
@@ -185,7 +171,7 @@
     </Container>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Id Policia"/>
+        <Property name="text" type="java.lang.String" value="Nombre del Policia"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="comboboxid">
@@ -206,7 +192,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Id Tipo"/>
+        <Property name="text" type="java.lang.String" value="Tipo de delito"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="botonintroducirdatos">
@@ -222,6 +208,27 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonintroducirdatosActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="botonregresarMenuPrincipal">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="66" green="66" red="66" type="rgb"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="99" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Volver al Menu Principal"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonregresarMenuPrincipalActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Id Multa"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtidMulta">
     </Component>
   </SubComponents>
 </Form>

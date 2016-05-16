@@ -7,6 +7,9 @@ package Vista;
 
 import Datos.JDBCDAO;
 import com.sun.prism.paint.Color;
+import java.awt.Container;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
 import java.sql.Connection;
@@ -14,6 +17,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 
 /**
  *
@@ -22,11 +26,19 @@ import javax.swing.ImageIcon;
 public class Principal extends javax.swing.JFrame {
 
     Connection conexion;
+    public Image imagenFondo;
+    public URL fondo;
+    
     public Principal() throws SQLException {
         initComponents();
+//        fondo=this.getClass().getResource("src/img/imagenFondo.png");
+        imagenFondo=new ImageIcon("src/img/imagenFondo.png").getImage();
+        this.setIconImage(imagenFondo);
+        Container contenedor=getContentPane();        
+        contenedor.add(panel);
+        this.setVisible(true);
         this.setTitle("Aplicacion Policia");
-        URL url=getClass().getResource("/img/iconoPolicia.png");
-        ImageIcon imagen=new ImageIcon(url);
+        ImageIcon imagen=new ImageIcon("src/img/iconoPolicia.png");
         this.setIconImage(imagen.getImage());
         this.conexion=new JDBCDAO().conectar();
         if(conexion!=null){
@@ -35,7 +47,10 @@ public class Principal extends javax.swing.JFrame {
         }
         
     }
-
+    public JPanel panel=new JPanel();
+        public void paintComponent(Graphics gr){
+            gr.drawImage(imagenFondo,0,0,this.getWidth(),this.getHeight(),this);
+        }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -146,7 +161,12 @@ public class Principal extends javax.swing.JFrame {
 
     private void botonListadoMultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonListadoMultasActionPerformed
         dispose();
-        MultasListado nuevaVentana=new MultasListado(this,true);
+        MultasListado nuevaVentana = null;
+        try {
+            nuevaVentana = new MultasListado(this,true);
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         nuevaVentana.setVisible(true);
         
     }//GEN-LAST:event_botonListadoMultasActionPerformed
