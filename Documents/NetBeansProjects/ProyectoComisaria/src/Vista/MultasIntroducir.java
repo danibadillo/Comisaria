@@ -28,7 +28,6 @@ public class MultasIntroducir extends javax.swing.JDialog {
     public MultasIntroducir(java.awt.Frame parent, boolean modal) throws SQLException {
         super(parent, modal);
         initComponents();
-        this.conexion=new JDBCDAO().conectar();
         this.setTitle("Modificacion e Introduccion de multas");
 //        URL url=getClass().getResource("src/img/iconoPolicia.png");
         ImageIcon imagen=new ImageIcon("src/img/iconoPolicia.png");
@@ -187,7 +186,7 @@ public class MultasIntroducir extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonintroducirdatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonintroducirdatosActionPerformed
-        String insertar="insert into multas values (?,?,?,?,?,?,?)";
+        String insertar="insert into multas(descripcion,fecha,importe,idpolicia,nifinfractor,idtipo) values (?,?,?,?,?,?)";
         String consultaPolicia="select idPolicia from policia where nombre=?";
         String consultaMultas="select id from multastipo where descripcion=?";
         int numero = 0;
@@ -222,23 +221,24 @@ public class MultasIntroducir extends javax.swing.JDialog {
 
         try {
             PreparedStatement ps=conexion.prepareStatement(insertar);
-            int id=Integer.parseInt(txtidMulta.getText());
-            ps.setInt(1,id);
+//            int id=Integer.parseInt(txtidMulta.getText());
+//            ps.setInt(1,id);
             String descripcion=txtdescripcion.getText();
-            ps.setString(2,descripcion);
-            ps.setString(3,fechaHora);
+            ps.setString(1,descripcion);
+            ps.setString(2,fechaHora);
             int importe=(int) spinnerImporte.getValue();
-            ps.setInt(4,importe);
-            ps.setInt(5,numero);
+            ps.setInt(3,importe);
+            ps.setInt(4,numero);
             String nif=txtinfractor.getText();
-            ps.setString(6,nif);
-            ps.setInt(7,idmulta);
+            ps.setString(5,nif);
+            ps.setInt(6,idmulta);
             int seleccion=ps.executeUpdate();
             if(seleccion>=1){
                 JOptionPane.showMessageDialog(null,"registros actualizados correctamente","mensaje de confirmacion",JOptionPane.INFORMATION_MESSAGE);
             }
         }catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,ex.getMessage(),"Mensaje de error",JOptionPane.ERROR_MESSAGE);
+//            JOptionPane.showMessageDialog(null,ex.getMessage(),"Mensaje de error",JOptionPane.ERROR_MESSAGE);
+            
         }catch(NumberFormatException e){
             JOptionPane.showMessageDialog(null,e.getMessage(),"Mensaje de error",JOptionPane.ERROR_MESSAGE);
         }

@@ -160,7 +160,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_botonIntroducirMultasActionPerformed
 
     private void botonListadoMultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonListadoMultasActionPerformed
-        dispose();
+//        dispose();
         MultasListado nuevaVentana = null;
         try {
             nuevaVentana = new MultasListado(this,true);
