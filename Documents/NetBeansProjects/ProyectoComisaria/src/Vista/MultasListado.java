@@ -6,17 +6,12 @@
 package Vista;
 
 import Datos.JDBCDAO;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -26,13 +21,14 @@ import javax.swing.table.DefaultTableModel;
  */
 public class MultasListado extends javax.swing.JDialog {
 
-    Connection conexion;
-
+    JDBCDAO jdbcdao=new JDBCDAO();
+    
     public MultasListado(java.awt.Frame parent, boolean modal) throws SQLException {
         super(parent, modal);
         initComponents();
+        jdbcdao.getConexion();
         this.setTitle("Listado de multas por policia");
-
+        
     }
 
     /**
@@ -97,7 +93,7 @@ public class MultasListado extends javax.swing.JDialog {
 
         botonexportararchivo.setBackground(new java.awt.Color(102, 102, 102));
         botonexportararchivo.setForeground(new java.awt.Color(153, 0, 0));
-        botonexportararchivo.setText("Imprimir a un  Archivo");
+        botonexportararchivo.setText("Exportar a un Archivo");
         botonexportararchivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonexportararchivoActionPerformed(evt);
@@ -154,76 +150,57 @@ public class MultasListado extends javax.swing.JDialog {
     private void botonmenuprincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonmenuprincipalActionPerformed
         dispose();
         try {
-            Principal principal = new Principal();
+            Principal principal=new Principal();
             principal.setVisible(true);
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "Mensaje de error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,ex.getMessage(),"Mensaje de error",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_botonmenuprincipalActionPerformed
 
     private void botonbuscarMultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonbuscarMultasActionPerformed
-        String[] filas = new String[5];
-        String[] datos = {"Id", "Descripcion", "Fecha", "Importe", "NifInfractor"};
-        DefaultTableModel modelo = new DefaultTableModel(null, datos);
-        String consulta = "select id,descripcion,fecha,importe,nifinfractor from multas where idpolicia=? or idpolicia=?";
-        String consulta2 = "select idPolicia from policia where nombre=? or numplaca=?";
-        int id1 = 0, id2 = 0;
+        String [] filas=new String[5];
+        String [] datos={"Id","Descripcion","Fecha","Importe","NifInfractor"};
+        DefaultTableModel modelo=new DefaultTableModel(null,datos);
+        String consulta="select id,descripcion,fecha,importe,nifinfractor from multas where idpolicia=? or idpolicia=?";
+        String consulta2="select idPolicia from policia where nombre=? or numplaca=?";
+        int id1 = 0,id2 = 0;
         try {
-            PreparedStatement psconsulta2 = conexion.prepareStatement(consulta2);
-            String nombre = txtnombre.getText();
-            psconsulta2.setString(1, nombre);
-            String numPlaca = txtnombre.getText();
-            psconsulta2.setString(2, numPlaca);
-            ResultSet rsconsulta2 = psconsulta2.executeQuery();
+            PreparedStatement psconsulta2=jdbcdao.getConexion().prepareStatement(consulta2);
+            String nombre=txtnombre.getText();
+            psconsulta2.setString(1,nombre);
+            String numPlaca=txtnombre.getText();
+            psconsulta2.setString(2,numPlaca);
+            ResultSet rsconsulta2=psconsulta2.executeQuery();
             rsconsulta2.next();
-            id1 = rsconsulta2.getInt(1);
-            id2 = rsconsulta2.getInt(1);
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "Mensaje de error", JOptionPane.ERROR_MESSAGE);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Mensaje de error", JOptionPane.ERROR_MESSAGE);
+            id1=rsconsulta2.getInt(1);
+            id2=rsconsulta2.getInt(1);
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,ex.getMessage(),"Mensaje de error",JOptionPane.ERROR_MESSAGE);
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(null,e.getMessage(),"Mensaje de error",JOptionPane.ERROR_MESSAGE);
         }
         try {
-            PreparedStatement ps = conexion.prepareStatement(consulta);
-            ps.setInt(1, id1);
-            ps.setInt(2, id2);
-            ResultSet rsconsulta = ps.executeQuery();
+            PreparedStatement ps=jdbcdao.getConexion().prepareStatement(consulta);
+            ps.setInt(1,id1);
+            ps.setInt(2,id2);
+            ResultSet rsconsulta=ps.executeQuery();
             rsconsulta.next();
-            while (rsconsulta.next()) {
-                filas[0] = rsconsulta.getString(1);
-                filas[1] = rsconsulta.getString(2);
-                filas[2] = rsconsulta.getString(3);
-                filas[3] = rsconsulta.getString(4);
-                filas[4] = rsconsulta.getString(5);
+            while(rsconsulta.next()){
+                filas[0]=rsconsulta.getString(1);
+                filas[1]=rsconsulta.getString(2);
+                filas[2]=rsconsulta.getString(3);
+                filas[3]=rsconsulta.getString(4);
+                filas[4]=rsconsulta.getString(5);
                 modelo.addRow(filas);
             }
             this.tablaDatos.setModel(modelo);
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "Mensaje de error", JOptionPane.ERROR_MESSAGE);
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,ex.getMessage(),"Mensaje de error",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_botonbuscarMultasActionPerformed
 
     private void botonexportararchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonexportararchivoActionPerformed
-        try {
-            File archivo = null;
-            JFileChooser fc = new JFileChooser();
-            int seleccion = fc.showSaveDialog(this);
-            System.out.println("hhhhhhhhhhh");
-            if (seleccion == JFileChooser.APPROVE_OPTION) {
-                archivo = fc.getSelectedFile();
-
-                BufferedWriter bfw = new BufferedWriter(new FileWriter(archivo));
-                int valores = 0;
-                for (int i = 0; i < tablaDatos.getRowCount(); i++) {
-                    String valor = tablaDatos.getValueAt(i, 3).toString();
-                    valores += Integer.parseInt(valor);
-                }
-                bfw.write("Las multas interpuestas por el policia " + txtnombre.getText() + " " + "es " + valores + " euros");
-                bfw.newLine();
-            }
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "Mensaje de error", JOptionPane.ERROR_MESSAGE);
-        }
+        
     }//GEN-LAST:event_botonexportararchivoActionPerformed
 
     /**

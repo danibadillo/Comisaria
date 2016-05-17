@@ -13,13 +13,8 @@ public class Policia {
     private String nombre,numPlaca,departamento;
     private Image foto;
     
-    public Policia(int idPolicia,String nombre,String numPlaca,int edad,String departamento,Image foto){
-        this.idPolicia=idPolicia;
-        this.nombre=nombre;
-        this.numPlaca=numPlaca;
-        this.edad=edad;
-        this.departamento=departamento;
-        this.foto=foto;
+    public Policia(){
+
     }
     public int getIdPolicia() {
         return idPolicia;

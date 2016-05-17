@@ -25,32 +25,21 @@ import javax.swing.JPanel;
  */
 public class Principal extends javax.swing.JFrame {
 
-    Connection conexion;
     public Image imagenFondo;
     public URL fondo;
+    JDBCDAO jdbcdao=new JDBCDAO();
     
     public Principal() throws SQLException {
         initComponents();
-//        fondo=this.getClass().getResource("src/img/imagenFondo.png");
-        imagenFondo=new ImageIcon("src/img/imagenFondo.png").getImage();
-        this.setIconImage(imagenFondo);
-        Container contenedor=getContentPane();        
-        contenedor.add(panel);
-        this.setVisible(true);
         this.setTitle("Aplicacion Policia");
         ImageIcon imagen=new ImageIcon("src/img/iconoPolicia.png");
         this.setIconImage(imagen.getImage());
-        this.conexion=new JDBCDAO().conectar();
-        if(conexion!=null){
+        if(jdbcdao.getConexion()!=null){
             txtconexion.setText("Conexion Establecida");
             txtconexion.setBackground(java.awt.Color.green);
         }
         
     }
-    public JPanel panel=new JPanel();
-        public void paintComponent(Graphics gr){
-            gr.drawImage(imagenFondo,0,0,this.getWidth(),this.getHeight(),this);
-        }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -150,7 +139,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void botonIntroducirMultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIntroducirMultasActionPerformed
         try {
-            dispose();
+//            dispose();
             MultasIntroducir nuevaVentana= new MultasIntroducir(this,true);
             nuevaVentana.setVisible(true);
             
@@ -168,13 +157,15 @@ public class Principal extends javax.swing.JFrame {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
         nuevaVentana.setVisible(true);
+
         
     }//GEN-LAST:event_botonListadoMultasActionPerformed
 
     private void botonPoliciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPoliciasActionPerformed
-        dispose();
+//        dispose();
         PoliciasMantenimiento mantenimiento=new PoliciasMantenimiento(this,true);
         mantenimiento.setVisible(true);
+        
     }//GEN-LAST:event_botonPoliciasActionPerformed
 
     /**

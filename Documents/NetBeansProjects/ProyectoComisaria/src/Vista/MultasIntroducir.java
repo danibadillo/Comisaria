@@ -6,6 +6,7 @@
 package Vista;
 
 import Datos.JDBCDAO;
+import Modelo.Multa;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.Date;
@@ -23,16 +24,22 @@ import javax.swing.JOptionPane;
  */
 public class MultasIntroducir extends javax.swing.JDialog {
 
-    Connection conexion;
+    
+    Principal principal = new Principal();
+    JDBCDAO jdbcdao=principal.jdbcdao;
+    
     
     public MultasIntroducir(java.awt.Frame parent, boolean modal) throws SQLException {
         super(parent, modal);
         initComponents();
+        jdbcdao.getConexion();
         this.setTitle("Modificacion e Introduccion de multas");
 //        URL url=getClass().getResource("src/img/iconoPolicia.png");
         ImageIcon imagen=new ImageIcon("src/img/iconoPolicia.png");
         this.setIconImage(imagen.getImage());
     }
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -56,8 +63,6 @@ public class MultasIntroducir extends javax.swing.JDialog {
         jLabel7 = new javax.swing.JLabel();
         botonintroducirdatos = new javax.swing.JButton();
         botonregresarMenuPrincipal = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        txtidMulta = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -98,8 +103,6 @@ public class MultasIntroducir extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setText("Id Multa");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -118,11 +121,6 @@ public class MultasIntroducir extends javax.swing.JDialog {
                             .addComponent(botonintroducirdatos, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
                             .addComponent(botonregresarMenuPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtidMulta, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(46, 46, 46))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -148,11 +146,7 @@ public class MultasIntroducir extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtidMulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                .addGap(67, 67, 67)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -191,57 +185,36 @@ public class MultasIntroducir extends javax.swing.JDialog {
         String consultaMultas="select id from multastipo where descripcion=?";
         int numero = 0;
         int idmulta = 0;
+        int seleccion;
         java.util.Date dt=new java.util.Date();
         java.text.SimpleDateFormat sdf=new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String fechaHora=sdf.format(dt);
+        String nombreDelito=(String) comboboxid.getSelectedItem();
+        String nombre=(String) listaPolicias.getSelectedValue();
+        int importe=(int) spinnerImporte.getValue();
+        Multa multa = new Multa();
+        multa.setImporte(importe);
+        multa.setFecha(dt);
+        multa.setIdpolicia(idmulta);
+        multa.setDescripcion(txtdescripcion.getText());
+        multa.setNifinfractor(txtinfractor.getText());
+        
         try {
-            PreparedStatement psConsultaMulta=conexion.prepareStatement(consultaMultas);            
-            String nombre=(String) comboboxid.getSelectedItem();
-            psConsultaMulta.setString(1,nombre);
-            ResultSet rsMulta=psConsultaMulta.executeQuery();
-            rsMulta.next();
-            idmulta=rsMulta.getInt(1);
+              jdbcdao.introducirMultas(jdbcdao.getConexion(),nombreDelito,nombre,importe,multa);
+//           if(seleccion>=1){
+//                JOptionPane.showMessageDialog(null,"registros actualizados correctamente","mensaje de confirmacion",JOptionPane.INFORMATION_MESSAGE);
+//            }
         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,ex.getMessage(),"Mensaje de error",JOptionPane.ERROR_MESSAGE);
         }catch(NumberFormatException e){
             JOptionPane.showMessageDialog(null,e.getMessage() ,"Mensaje de error",JOptionPane.ERROR_MESSAGE);
         }
-        try {
-            PreparedStatement psConsulta=conexion.prepareStatement(consultaPolicia);          
-            String nombre=(String) listaPolicias.getSelectedValue();
-            psConsulta.setString(1,nombre);
-            ResultSet rs=psConsulta.executeQuery();
-            rs.next();
-            numero=rs.getInt("idPolicia");
-        }catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,ex.getMessage(),"Mensaje de error",JOptionPane.ERROR_MESSAGE);
-        }catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(null,e.getMessage(),"Mensaje de error",JOptionPane.ERROR_MESSAGE);
-        }
 
-        try {
-            PreparedStatement ps=conexion.prepareStatement(insertar);
-//            int id=Integer.parseInt(txtidMulta.getText());
-//            ps.setInt(1,id);
-            String descripcion=txtdescripcion.getText();
-            ps.setString(1,descripcion);
-            ps.setString(2,fechaHora);
-            int importe=(int) spinnerImporte.getValue();
-            ps.setInt(3,importe);
-            ps.setInt(4,numero);
-            String nif=txtinfractor.getText();
-            ps.setString(5,nif);
-            ps.setInt(6,idmulta);
-            int seleccion=ps.executeUpdate();
-            if(seleccion>=1){
-                JOptionPane.showMessageDialog(null,"registros actualizados correctamente","mensaje de confirmacion",JOptionPane.INFORMATION_MESSAGE);
-            }
-        }catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null,ex.getMessage(),"Mensaje de error",JOptionPane.ERROR_MESSAGE);
+
+
             
-        }catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(null,e.getMessage(),"Mensaje de error",JOptionPane.ERROR_MESSAGE);
-        }
+            
+
 
         
         
@@ -255,6 +228,7 @@ public class MultasIntroducir extends javax.swing.JDialog {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,ex.getMessage(),"Mensaje de error",JOptionPane.ERROR_MESSAGE);
         }
+        
     }//GEN-LAST:event_botonregresarMenuPrincipalActionPerformed
 
     /**
@@ -308,7 +282,6 @@ public class MultasIntroducir extends javax.swing.JDialog {
     private javax.swing.JButton botonintroducirdatos;
     private javax.swing.JButton botonregresarMenuPrincipal;
     private javax.swing.JComboBox comboboxid;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -318,7 +291,6 @@ public class MultasIntroducir extends javax.swing.JDialog {
     private javax.swing.JList listaPolicias;
     private javax.swing.JSpinner spinnerImporte;
     private javax.swing.JTextField txtdescripcion;
-    private javax.swing.JTextField txtidMulta;
     private javax.swing.JTextField txtinfractor;
     // End of variables declaration//GEN-END:variables
 }
