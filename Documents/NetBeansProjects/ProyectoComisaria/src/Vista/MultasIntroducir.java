@@ -180,12 +180,10 @@ public class MultasIntroducir extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonintroducirdatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonintroducirdatosActionPerformed
-        String insertar="insert into multas(descripcion,fecha,importe,idpolicia,nifinfractor,idtipo) values (?,?,?,?,?,?)";
-        String consultaPolicia="select idPolicia from policia where nombre=?";
-        String consultaMultas="select id from multastipo where descripcion=?";
-        int numero = 0;
+//        String insertar="insert into multas(descripcion,fecha,importe,idpolicia,nifinfractor,idtipo) values (?,?,?,?,?,?)";
+//        String consultaPolicia="select idPolicia from policia where nombre=?";
+//        String consultaMultas="select id from multastipo where descripcion=?";
         int idmulta = 0;
-        int seleccion;
         java.util.Date dt=new java.util.Date();
         java.text.SimpleDateFormat sdf=new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String fechaHora=sdf.format(dt);

@@ -63,6 +63,9 @@ public class JDBCDAO {
             ps.setString(5,nif);
             ps.setInt(6,idmulta);
             seleccion=ps.executeUpdate();
+            if(seleccion>=1){
+                JOptionPane.showMessageDialog(null,"Datos introducidos con exito","Mensaje de confirmacion",JOptionPane.INFORMATION_MESSAGE);
+            }
             return seleccion;
     }
    
