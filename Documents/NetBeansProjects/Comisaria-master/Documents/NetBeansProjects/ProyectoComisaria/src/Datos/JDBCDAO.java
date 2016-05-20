@@ -13,7 +13,10 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
 import Modelo.Policia;
+import Vista.MultasListado;
 import Vista.Principal;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,6 +28,7 @@ public class JDBCDAO {
     private Connection conexion;
     private PreparedStatement ps;
     private ResultSet rs;
+    
     
     public JDBCDAO() throws SQLException {
         String bd = "comisaria";
@@ -68,6 +72,9 @@ public class JDBCDAO {
         ps.setString(5, nif);
         ps.setInt(6, idmulta);
         seleccion = ps.executeUpdate();
+        if(seleccion>=1){
+            JOptionPane.showMessageDialog(null,"Datos introducidos correctamente","Mensaje de confirmacion",JOptionPane.INFORMATION_MESSAGE);
+        }
         return seleccion;
     }
 
@@ -157,12 +164,11 @@ public class JDBCDAO {
         lineasModificadas = ps.executeUpdate();
         return lineasModificadas;
     }
-    public void IntroducirMultas(Multa multa,Policia policia) throws SQLException{
-        String [] filas=new String[5];
-        String [] datos={"Id","Descripcion","Fecha","Importe","NifInfractor"};
-        DefaultTableModel modelo=new DefaultTableModel(null,datos);
-        String consulta="select id,descripcion,fecha,importe,nifinfractor from multas where idpolicia=? or idpolicia=?";
+    public List<Multa> MultasListado(Policia policia) throws SQLException{
+        
+        String consulta="select id,descripcion,fecha,importe,nifinfractor from multas where idpolicia=? ";
         String consulta2="select idPolicia from policia where nombre=? or numplaca=?";
+        
         PreparedStatement psconsulta2=conexion.prepareStatement(consulta2);
         String nombre=policia.getNombre();
         psconsulta2.setString(1,nombre);
@@ -171,22 +177,29 @@ public class JDBCDAO {
         ResultSet rsconsulta2=psconsulta2.executeQuery();
         rsconsulta2.next();
         int id1=rsconsulta2.getInt(1);
-        int id2=rsconsulta2.getInt(1);
+//        int id2=rsconsulta2.getInt(1);
+        
         PreparedStatement psconsulta1=conexion.prepareStatement(consulta);
         psconsulta1.setInt(1,id1);
-        psconsulta1.setInt(2,id2);
+//        psconsulta1.setInt(2,id2);
         ResultSet rsconsulta=psconsulta1.executeQuery();
-        rsconsulta.next();
-        while(rsconsulta.next()){
-                filas[0]=rsconsulta.getString(1);
-                filas[1]=rsconsulta.getString(2);
-                filas[2]=rsconsulta.getString(3);
-                filas[3]=rsconsulta.getString(4);
-                filas[4]=rsconsulta.getString(5);
-                modelo.addRow(filas);
-            }
-
+        List<Multa> multas = new ArrayList<>();
         
+        while(rsconsulta.next()){
+            Multa multa = new Multa();
+            multa.setId(Integer.parseInt(rsconsulta.getString(1)));
+            multa.setDescripcion(rsconsulta.getString(2));
+            multa.setFecha(rsconsulta.getDate(3));
+            multa.setImporte(Integer.parseInt(rsconsulta.getString(4)));
+            multa.setNifinfractor(rsconsulta.getString(5));
+            multas.add(multa);
+//                filas[1]=;
+//                filas[2]=rsconsulta.getString(3);
+//                filas[3]=rsconsulta.getString(4);
+//                filas[4]=rsconsulta.getString(5);
+//                modelo.addRow(filas);
+        }
+        return multas;
     }
   
 }

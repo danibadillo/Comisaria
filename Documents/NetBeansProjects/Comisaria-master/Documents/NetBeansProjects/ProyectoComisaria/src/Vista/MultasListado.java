@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -195,15 +196,27 @@ public class MultasListado extends javax.swing.JDialog {
 //                filas[4]=rsconsulta.getString(5);
 //                modelo.addRow(filas);
 //            }
-        Multa multa=new Multa();
+
         Policia policia=new Policia();
         try {            
-            jdbcdao.IntroducirMultas(multa,policia);
-            this.tablaDatos.setModel(modelo);
+            policia.setNombre(txtnombre.getText());
+            policia.setNumPlaca(txtnombre.getText());
+            List<Multa> multas = jdbcdao.MultasListado(policia);
+            for(Multa multa: multas){
+                filas[0] = Integer.toString(multa.getId());
+                filas[1] = multa.getDescripcion();
+                filas[2] = multa.getFecha().toString();
+                filas[3] = Integer.toString(multa.getImporte());
+                filas[4] = multa.getNifinfractor();
+                modelo.addRow(filas);
+            }
+            
         } catch (SQLException ex) {
-            Logger.getLogger(MultasListado.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,ex.getMessage(),"Mensaje de error",JOptionPane.ERROR_MESSAGE);
         }
             
+//            modelo.addRow(datos);
+            this.tablaDatos.setModel(modelo);
 //        }catch (SQLException ex) {
 //            JOptionPane.showMessageDialog(null,ex.getMessage(),"Mensaje de error",JOptionPane.ERROR_MESSAGE);
 //        }
