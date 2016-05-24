@@ -64,8 +64,6 @@ public class MultasIntroducir extends javax.swing.JDialog {
         botonintroducirdatos = new javax.swing.JButton();
         botonregresarMenuPrincipal = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
         jLabel2.setText("Descripción");
 
         jLabel4.setText("Nif Infractor");

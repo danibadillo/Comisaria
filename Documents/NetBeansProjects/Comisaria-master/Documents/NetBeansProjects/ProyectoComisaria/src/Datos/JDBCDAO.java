@@ -28,6 +28,9 @@ public class JDBCDAO {
     private Connection conexion;
     private PreparedStatement ps;
     private ResultSet rs;
+    java.util.Date dt = new java.util.Date();
+    java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    String fechaHora = sdf.format(dt);
     
     
     public JDBCDAO() throws SQLException {
@@ -49,9 +52,6 @@ public class JDBCDAO {
         String consultaMultas = "select id from multastipo where descripcion=?";
         int numero = 0;
         int idmulta = 0;
-        java.util.Date dt = new java.util.Date();
-        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String fechaHora = sdf.format(dt);
         PreparedStatement psConsultaMulta = conexion.prepareStatement(consultaMultas);
         psConsultaMulta.setString(1, nombreDelito);
         ResultSet rsMulta = psConsultaMulta.executeQuery();
@@ -177,11 +177,10 @@ public class JDBCDAO {
         ResultSet rsconsulta2=psconsulta2.executeQuery();
         rsconsulta2.next();
         int id1=rsconsulta2.getInt(1);
-//        int id2=rsconsulta2.getInt(1);
+
         
         PreparedStatement psconsulta1=conexion.prepareStatement(consulta);
         psconsulta1.setInt(1,id1);
-//        psconsulta1.setInt(2,id2);
         ResultSet rsconsulta=psconsulta1.executeQuery();
         List<Multa> multas = new ArrayList<>();
         
@@ -193,11 +192,7 @@ public class JDBCDAO {
             multa.setImporte(Integer.parseInt(rsconsulta.getString(4)));
             multa.setNifinfractor(rsconsulta.getString(5));
             multas.add(multa);
-//                filas[1]=;
-//                filas[2]=rsconsulta.getString(3);
-//                filas[3]=rsconsulta.getString(4);
-//                filas[4]=rsconsulta.getString(5);
-//                modelo.addRow(filas);
+
         }
         return multas;
     }

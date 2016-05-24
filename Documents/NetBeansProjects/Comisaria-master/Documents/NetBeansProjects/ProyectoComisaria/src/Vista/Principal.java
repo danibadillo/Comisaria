@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -32,13 +33,14 @@ public class Principal extends javax.swing.JFrame {
     public Principal() throws SQLException {
         initComponents();
         this.setTitle("Aplicacion Policia");
+        this.setVisible(true);
         ImageIcon imagen=new ImageIcon("src/img/iconoPolicia.png");
         this.setIconImage(imagen.getImage());
         if(jdbcdao.getConexion()!=null){
             txtconexion.setText("Conexion Establecida");
             txtconexion.setBackground(java.awt.Color.green);
         }
-        
+        hide();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -57,7 +59,7 @@ public class Principal extends javax.swing.JFrame {
         botonIntroducirMultas = new javax.swing.JButton();
         txtconexion = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Mantenimiento Policias");
 
@@ -139,38 +141,44 @@ public class Principal extends javax.swing.JFrame {
 
     private void botonIntroducirMultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIntroducirMultasActionPerformed
         try {
-//            dispose();
+            
             MultasIntroducir nuevaVentana= new MultasIntroducir(this,true);
             nuevaVentana.setVisible(true);
-            
+            hide();
         } catch (SQLException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,ex.getMessage(),"Mensaje de error",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_botonIntroducirMultasActionPerformed
 
     private void botonListadoMultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonListadoMultasActionPerformed
-//        dispose();
+        
         MultasListado nuevaVentana = null;
         try {
+            
             nuevaVentana = new MultasListado(this,true);
+            nuevaVentana.setVisible(true);
+            hide();
         } catch (SQLException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,ex.getMessage(),"Mensaje de error",JOptionPane.ERROR_MESSAGE);
+        
         }
-        nuevaVentana.setVisible(true);
+        
 
         
     }//GEN-LAST:event_botonListadoMultasActionPerformed
 
     private void botonPoliciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPoliciasActionPerformed
-//        dispose();
+
         PoliciasMantenimiento mantenimiento = null;
         try {
+            
             mantenimiento = new PoliciasMantenimiento(this,true);
             mantenimiento.setVisible(true);
+            hide();
         } catch (SQLException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,ex.getMessage(),"Mensaje de error",JOptionPane.ERROR_MESSAGE);
         }
-        mantenimiento.setVisible(true);
+        
         
     }//GEN-LAST:event_botonPoliciasActionPerformed
 

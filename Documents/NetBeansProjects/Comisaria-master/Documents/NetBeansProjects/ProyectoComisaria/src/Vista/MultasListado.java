@@ -8,6 +8,10 @@ package Vista;
 import Datos.JDBCDAO;
 import Modelo.Multa;
 import Modelo.Policia;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,6 +19,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -50,8 +55,6 @@ public class MultasListado extends javax.swing.JDialog {
         botonmenuprincipal = new javax.swing.JButton();
         botonbuscarMultas = new javax.swing.JButton();
         botonexportararchivo = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Introduce nombre o placa del policia");
 
@@ -223,7 +226,27 @@ public class MultasListado extends javax.swing.JDialog {
     }//GEN-LAST:event_botonbuscarMultasActionPerformed
 
     private void botonexportararchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonexportararchivoActionPerformed
-        
+        int valores=0;
+        String valor="";
+        String nombreArchivo=JOptionPane.showInputDialog("Dale nombre al Archivo");
+        JFileChooser fc=new JFileChooser();
+        fc.setSelectedFile(new File(nombreArchivo));
+        int seleccion=fc.showSaveDialog(null);
+        if(seleccion==JFileChooser.APPROVE_OPTION){
+            try {
+                
+                BufferedWriter bf=new BufferedWriter(new FileWriter(fc.getSelectedFile()));
+                for(int i=0;i<tablaDatos.getRowCount();i++){
+                    valor=(String) tablaDatos.getValueAt(i,3);
+                    valores+=Integer.parseInt(valor);
+                }
+                bf.write(txtnombre.getText()+" acumula un total de "+valores+" euros");
+                bf.close();
+                
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null,ex.getMessage(),"Mensaje de error",JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_botonexportararchivoActionPerformed
 
     /**
